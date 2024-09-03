@@ -26,6 +26,18 @@ const Navbar = () => {
             <li>
               <a>Home</a>
             </li>
+            <li>
+              <a>Menu</a>
+            </li>
+            <li>
+              <a>Order</a>
+            </li>
+            <li>
+              <a>SignUp</a>
+            </li>
+            <li>
+              <a>Dashboard</a>
+            </li>
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">Restaurant</a>
