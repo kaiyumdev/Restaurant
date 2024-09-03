@@ -6,6 +6,7 @@ import image3 from "../../../../src/assets/home/03.png";
 import image4 from "../../../../src/assets/home/04.jpg";
 import image5 from "../../../../src/assets/home/05.png";
 import image6 from "../../../../src/assets/home/06.png";
+import "./Banner.css";
 
 const Banner = () => {
   return (
