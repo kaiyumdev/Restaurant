@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Parallax } from "react-parallax";
 
 const Cover = ({ img, title }) => {
