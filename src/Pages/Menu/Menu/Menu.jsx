@@ -15,7 +15,6 @@ const Menu = () => {
   const pizzas = menu.filter((item) => item.category === "pizza");
   const offered = menu.filter((item) => item.category === "offered");
   const soups = menu.filter((item) => item.category === "soup");
-  console.log(soups);
   return (
     <div>
       <Cover img={menuImg} title="Our Menu"></Cover>
