@@ -4,9 +4,13 @@ import shopImg from "../../../assets/shop/banner2.jpg";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import useMenu from "../../../hooks/useMenu";
 import OrderTab from "../OrderTab/OrderTab";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const categories = ["salad", "pizza", "soup", "dessert", "drinks", "offered"];
+  const { category } = useParams();
+  const inatialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(inatialIndex);
   const [menu] = useMenu();
   const desserts = menu.filter((item) => item.category === "dessert");
   const salads = menu.filter((item) => item.category === "salad");
