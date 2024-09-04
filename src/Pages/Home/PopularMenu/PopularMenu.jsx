@@ -6,15 +6,17 @@ const PopularMenu = () => {
   const [menu] = useMenu();
   const popular = menu.filter((item) => item.category === "popular");
   return (
-    <div>
+    <section>
       <SectionTitle
-        heading="From Our Menu"
-        subHeading="Popular Items"
+        heading={"From Our Menu"}
+        subHeading={"Popular Items"}
       ></SectionTitle>
-      {popular.map((item) => (
-        <MenuItem key={item.name} item={item}></MenuItem>
-      ))}
-    </div>
+      <div className="grid md:grid-cols-2 gap-4">
+        {popular.map((item) => (
+          <MenuItem key={item.name} item={item}></MenuItem>
+        ))}
+      </div>
+    </section>
   );
 };
 
