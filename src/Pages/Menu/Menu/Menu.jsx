@@ -22,7 +22,7 @@ const Menu = () => {
         subHeading="Don't Miss"
         heading="Today's Offer"
       ></SectionTitle>
-      <MenuCategory items={offered}></MenuCategory>
+      <MenuCategory title="offered" items={offered}></MenuCategory>
       <MenuCategory
         title="dessert"
         items={desserts}
