@@ -19,7 +19,7 @@ const OrderTab = ({ items }) => {
           <FoodCard key={index} item={item}></FoodCard>
         ))}
       </div>
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 my-4">
         {/* Render pagination buttons */}
         {Array.from(
           { length: Math.ceil(items.length / itemsPerPage) },
