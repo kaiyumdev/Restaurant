@@ -23,7 +23,7 @@ const Order = () => {
   return (
     <div>
       <Helmet>
-        <title>Bistro Boss | Order</title>
+        <title>Restaurant | Order</title>
       </Helmet>
       <Cover img={shopImg} title="Order Shop"></Cover>
       <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
@@ -33,7 +33,7 @@ const Order = () => {
             <Tab>Pizza</Tab>
             <Tab>Soup</Tab>
             <Tab>Dessert</Tab>
-            <Tab>Drinks</Tab>
+            <Tab>Drink</Tab>
             <Tab>Offered</Tab>
           </TabList>
         </div>
