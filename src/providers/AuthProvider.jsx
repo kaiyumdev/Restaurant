@@ -61,9 +61,24 @@ const AuthProvider = ({ children }) => {
         // ...
       }
     });
+    return () => {
+      return unsubscribe;
+    };
   }, [user.uid]);
 
-  return <div>{children}</div>;
+  const authInfo = {
+    user,
+    loading,
+    createUser,
+    signIn,
+    logOut,
+    updateUserProfile,
+    signInWithGoogle,
+  };
+
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
