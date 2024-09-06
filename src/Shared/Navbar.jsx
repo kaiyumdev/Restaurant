@@ -42,6 +42,10 @@ const Navbar = () => {
           </button>
         </li>
       )}
+      <li>
+        {" "}
+        <span>{user && user.displayName}</span>
+      </li>
     </>
   );
   return (

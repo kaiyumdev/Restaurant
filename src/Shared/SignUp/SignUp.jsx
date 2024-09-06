@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
@@ -13,7 +13,13 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    createUser(data.email, data.password).then((user) => console.log(user));
+    createUser(data.email, data.password).then((result) => {
+      const logInUser = result.user;
+      console.log(logInUser);
+      updateUserProfile(data.name, data.photoURL).then((result) => {
+        console.log(result);
+      });
+    });
   };
   return (
     <>
