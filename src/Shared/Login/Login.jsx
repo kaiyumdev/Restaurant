@@ -6,6 +6,7 @@ import {
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import Swal from "sweetalert2";
 
 const Login = () => {
   useEffect(() => {
@@ -15,7 +16,13 @@ const Login = () => {
   const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value) == true) {
-      alert("Captcha validation");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Recaptcha validate successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
