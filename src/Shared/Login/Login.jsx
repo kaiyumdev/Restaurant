@@ -87,21 +87,12 @@ const Login = () => {
                   type="text"
                   name="captcha"
                   onBlur={handleValidateCaptcha}
-                  // ref={captchaRef}
                   placeholder="Type the captcha above"
                   className="input input-bordered"
-                  // required
                 />
-                {/* <button
-                  className="btn btn-outline btn-xm mt-2"
-                >
-                  Validate
-                </button> */}
               </div>
               <div className="form-control mt-6">
-                {/* apply disabled for re captcha*/}
                 <input
-                  // disabled={false}
                   type="submit"
                   value="login"
                   className="btn btn-primary"

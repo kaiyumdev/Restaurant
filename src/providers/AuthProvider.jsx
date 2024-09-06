@@ -12,7 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -53,10 +53,7 @@ const AuthProvider = ({ children }) => {
       setLoading(true);
       setUser(currentUser);
       if (currentUser) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
-        // ...
+        console.log(currentUser);
       } else {
         // User is signed out
         // ...

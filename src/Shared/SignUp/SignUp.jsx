@@ -1,19 +1,25 @@
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    createUser(data.email, data.password).then((user) => console.log(user));
+  };
   return (
     <>
       <Helmet>
-        <title>Bistro Boss | Sign Up</title>
+        <title>Restaurant | Sign Up</title>
       </Helmet>
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
@@ -105,7 +111,8 @@ const SignUp = () => {
                 )}
                 {errors.password?.type === "pattern" && (
                   <p className="text-red-600">
-                    Password must be alphanumeric characters
+                    Password must be one upper, case lowercase, digit & special
+                    characters
                   </p>
                 )}
                 <label className="label">
