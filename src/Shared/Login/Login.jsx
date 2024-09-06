@@ -7,8 +7,10 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const { signIn } = useAuth();
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -31,7 +33,9 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    signIn(email, password).then((user) => {
+      console.log(user);
+    });
   };
   return (
     <>
