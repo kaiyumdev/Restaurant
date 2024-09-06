@@ -1,13 +1,19 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
+  const location = useLocation();
+  let navigate = useNavigate();
+
+  let from = location?.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -16,8 +22,16 @@ const SignUp = () => {
     createUser(data.email, data.password).then((result) => {
       const logInUser = result.user;
       console.log(logInUser);
-      updateUserProfile(data.name, data.photoURL).then((result) => {
-        console.log(result);
+      updateUserProfile(data.name, data.photoURL).then(() => {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Create a new user profile",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(from, { replace: true });
       });
     });
   };
