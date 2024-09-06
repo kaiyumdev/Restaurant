@@ -1,6 +1,46 @@
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+  const navOptions = (
+    <>
+      {" "}
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/menu">Menu</Link>
+      </li>
+      <li>
+        <Link to="/order/salad">Order</Link>
+      </li>
+      <li>
+        <Link to="/signup">SignUp</Link>
+      </li>
+      <li>
+        <a>Dashboard</a>
+      </li>
+      {user ? (
+        <li className="flex items-center justify-center">
+          <button onClick={handleLogOut} className="btn btn-ghost">
+            LogOut
+          </button>
+        </li>
+      ) : (
+        <li className="flex items-center justify-center">
+          <button>
+            <Link to="/login">Login</Link>
+          </button>
+        </li>
+      )}
+    </>
+  );
   return (
     <div className="navbar fixed z-10 bg-opacity-30 text-white bg-black">
       <div className="navbar-start">
@@ -25,43 +65,13 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/menu">Menu</Link>
-            </li>
-            <li>
-              <Link to="/order/salad">Order</Link>
-            </li>
-            <li>
-              <Link to="/signup">SignUp</Link>
-            </li>
-            <li>
-              <a>Dashboard</a>
-            </li>
+            {navOptions}
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">Restaurant</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/menu">Menu</Link>
-          </li>
-          <li>
-            <Link to="/order/salad">Order</Link>
-          </li>
-          <li>
-            <Link to="/signup">SignUp</Link>
-          </li>
-          <li>
-            <a>Dashboard</a>
-          </li>
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="navbar-end">
         <a className="btn">Button</a>

@@ -30,9 +30,9 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logOut = (email, password) => {
+  const logOut = () => {
     setLoading(true);
-    return signOut();
+    return signOut(auth);
   };
 
   const updateUserProfile = (name, photo) => {
@@ -55,6 +55,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         console.log(currentUser);
       } else {
+        setLoading(false);
         // User is signed out
         // ...
       }
