@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -10,6 +10,10 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const location = useLocation();
+  let navigate = useNavigate();
+
+  let from = location?.state?.from?.pathname || "/";
   const { signIn } = useAuth();
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -35,6 +39,7 @@ const Login = () => {
     const password = form.password.value;
     signIn(email, password).then((user) => {
       console.log(user);
+      navigate(from, { replace: true });
     });
   };
   return (
