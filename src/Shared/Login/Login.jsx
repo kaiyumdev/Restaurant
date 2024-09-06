@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
   };
   return (
     <>
       <Helmet>
-        <title>Bistro Boss | Login</title>
+        <title>Restaurant | Login</title>
       </Helmet>
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
@@ -71,7 +74,7 @@ const Login = () => {
               <div className="form-control mt-6">
                 {/* apply disabled for re captcha*/}
                 <input
-                  disabled={false}
+                  // disabled={false}
                   type="submit"
                   value="login"
                   className="btn btn-primary"
