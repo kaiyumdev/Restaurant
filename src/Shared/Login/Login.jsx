@@ -1,7 +1,24 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import {
+  LoadCanvasTemplate,
+  loadCaptchaEnginge,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const Login = () => {
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
+    if (validateCaptcha(user_captcha_value) == true) {
+      alert("Captcha validation");
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -56,10 +73,13 @@ const Login = () => {
                 </label>
               </div>
               <div className="form-control">
-                <label className="label">{/* <LoadCanvasTemplate /> */}</label>
+                <label className="label">
+                  <LoadCanvasTemplate />
+                </label>
                 <input
                   type="text"
-                  //   onBlur={handleValidateCaptcha}
+                  name="captcha"
+                  onBlur={handleValidateCaptcha}
                   // ref={captchaRef}
                   placeholder="Type the captcha above"
                   className="input input-bordered"
