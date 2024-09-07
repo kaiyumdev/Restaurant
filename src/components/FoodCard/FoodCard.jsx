@@ -1,7 +1,26 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React from "react";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const FoodCard = ({ item }) => {
   const { name, image, price, recipe, _id } = item;
+  const { user } = useAuth();
+
+  const handleAddToCart = () => {
+    if (user && user?.email) {
+      const cartItem = {
+        menuId: _id,
+        email: user.email,
+        name,
+        price,
+        recipe,
+      };
+      axios.post("http://localhost:5001/carts", cartItem);
+    }
+  };
+
   return (
     <div className="card bg-base-100 w-96 shadow-xl">
       <figure>
@@ -15,7 +34,7 @@ const FoodCard = ({ item }) => {
         <p>{recipe}</p>
         <div className="card-actions justify-end">
           <button
-            // onClick={() => handleAddToCart(item)}
+            onClick={() => handleAddToCart(item)}
             className="btn btn-outline bg-slate-100 border-orange-400 border-0 border-b-4 mt-4"
           >
             Add to Cart
