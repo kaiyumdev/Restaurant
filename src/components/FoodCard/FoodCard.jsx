@@ -3,10 +3,14 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const FoodCard = ({ item }) => {
   const { name, image, price, recipe, _id } = item;
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleAddToCart = () => {
     if (user && user?.email) {
@@ -18,6 +22,22 @@ const FoodCard = ({ item }) => {
         recipe,
       };
       axios.post("http://localhost:5001/carts", cartItem);
+    } else {
+      Swal.fire({
+        title: "Please logged In?",
+        text: "Please login to add to the cart!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          //send user to the login page
+          navigate("/login", { state: { from: location } });
+          // <Navigate to='/login' state={{ from: location }} replace></Navigate>
+        }
+      });
     }
   };
 
