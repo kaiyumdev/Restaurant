@@ -21,7 +21,9 @@ const FoodCard = ({ item }) => {
         price,
         recipe,
       };
-      axios.post("http://localhost:5001/carts", cartItem);
+      axios
+        .post("http://localhost:5001/carts", cartItem)
+        .then((res) => console.log(res.data));
     } else {
       Swal.fire({
         title: "Please logged In?",
@@ -35,7 +37,6 @@ const FoodCard = ({ item }) => {
         if (result.isConfirmed) {
           //send user to the login page
           navigate("/login", { state: { from: location } });
-          // <Navigate to='/login' state={{ from: location }} replace></Navigate>
         }
       });
     }
