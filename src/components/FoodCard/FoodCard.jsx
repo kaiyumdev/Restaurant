@@ -36,6 +36,7 @@ const FoodCard = ({ item }) => {
             timer: 1500,
           });
         }
+        refetch();
       });
     } else {
       Swal.fire({
