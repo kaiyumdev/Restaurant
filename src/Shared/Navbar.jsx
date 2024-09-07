@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -22,27 +23,17 @@ const Navbar = () => {
       <li className="flex items-center justify-center">
         <Link to="/signup">SignUp</Link>
       </li>
-      {/* <li className="flex items-center justify-center">
+      <li className="flex items-center justify-center">
         <Link to="/dashboard/cart">
           <button className="btn flex items-center justify-center">
             <FaShoppingCart />
-            <div className="badge badge-secondary">+{cart?.length}</div>
+            <div className="badge badge-secondary">+</div>
           </button>
         </Link>
-      </li> */}
+      </li>
 
-      {user ? (
-        <li className="flex items-center justify-center">
-          <button onClick={handleLogOut} className="btn btn-ghost">
-            LogOut
-          </button>
-        </li>
-      ) : (
-        <li className="flex items-center justify-center">
-          <button>
-            <Link to="/login">Login</Link>
-          </button>
-        </li>
+      {user && (
+        <li className="flex items-center justify-center">{user.displayName}</li>
       )}
     </>
   );
@@ -81,7 +72,7 @@ const Navbar = () => {
           to="/"
           className="btn btn-ghost text-xl flex items-center justify-center"
         >
-          Bistro Boss
+          Restaurant
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -90,7 +81,20 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn flex items-center justify-center">Button</a>
+        {/* <a className="btn flex items-center justify-center"></a> */}
+        {user ? (
+          <li className="flex items-center justify-center">
+            <button onClick={handleLogOut} className="btn btn-ghost">
+              LogOut
+            </button>
+          </li>
+        ) : (
+          <li className="flex items-center justify-center">
+            <button>
+              <Link to="/login">Login</Link>
+            </button>
+          </li>
+        )}
       </div>
     </div>
   );
