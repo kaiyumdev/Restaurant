@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -11,31 +12,31 @@ const Cart = () => {
     0
   );
 
-  //   const handleDelete = (id) => {
-  //     Swal.fire({
-  //       title: "Are you sure?",
-  //       text: "You won't be able to revert this!",
-  //       icon: "warning",
-  //       showCancelButton: true,
-  //       confirmButtonColor: "#3085d6",
-  //       cancelButtonColor: "#d33",
-  //       confirmButtonText: "Yes, delete it!",
-  //     }).then((result) => {
-  //       console.log(result);
-  //       if (result.isConfirmed) {
-  //         axiosSecure.delete(`/carts/${id}`).then((res) => {
-  //           if (res.data.deletedCount > 0) {
-  //             refetch();
-  //             Swal.fire({
-  //               title: "Deleted!",
-  //               text: "Your file has been deleted.",
-  //               icon: "success",
-  //             });
-  //           }
-  //         });
-  //       }
-  //     });
-  //   };
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      console.log(result);
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <div className="overflow-x-auto">
       <div className="flex justify-evenly my-5">
@@ -76,7 +77,7 @@ const Cart = () => {
                   <div className="avatar">
                     <div className="mask mask-squircle h-12 w-12">
                       <img
-                        src={item.image}
+                        src={item?.image}
                         alt="Avatar Tailwind CSS Component"
                       />
                     </div>
@@ -86,12 +87,12 @@ const Cart = () => {
               <td>{item.name}</td>
               <td>{item.price}</td>
               <th>
-                {/* <button
+                <button
                   onClick={() => handleDelete(item._id)}
                   className="btn btn-ghost btn-lg text-red-600 xl"
                 >
                   <FaTrashAlt></FaTrashAlt>
-                </button> */}
+                </button>
               </th>
             </tr>
           </tbody>

@@ -22,6 +22,7 @@ const FoodCard = ({ item }) => {
         menuId: _id,
         email: user.email,
         name,
+        image,
         price,
         recipe,
       };
