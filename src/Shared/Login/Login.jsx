@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -39,7 +40,6 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     signIn(email, password).then((user) => {
-      console.log(user);
       navigate(from, { replace: true });
     });
   };
