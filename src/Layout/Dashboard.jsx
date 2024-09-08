@@ -6,6 +6,7 @@ import {
   FaList,
   FaSearch,
   FaShoppingCart,
+  FaUsers,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
@@ -38,9 +39,9 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/review">
-                <FaAd></FaAd>
-                Add a Review
+              <NavLink to="/dashboard/users">
+                <FaUsers></FaUsers>
+                All Users
               </NavLink>
             </li>
             <li>
