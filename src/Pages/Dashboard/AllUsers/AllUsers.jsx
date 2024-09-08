@@ -1,9 +1,36 @@
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import useUsers from "../../../hooks/useUsers";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AllUsers = () => {
-  const [users] = useUsers();
-  console.log(users);
+  const [users, refetch] = useUsers();
+  const axiosSecure = useAxiosSecure();
+
+  const handleDelete = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "User has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
       <div className="flex justify-evenly my-4">
@@ -41,12 +68,12 @@ const AllUsers = () => {
                     )} */}
                   </td>
                   <td>
-                    {/* <button
+                    <button
                       onClick={() => handleDelete(user)}
                       className="btn btn-ghost btn-lg text-red-600 xl"
                     >
                       <FaTrashAlt />
-                    </button> */}
+                    </button>
                   </td>
                 </tr>
               ))}
