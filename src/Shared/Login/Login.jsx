@@ -8,6 +8,7 @@ import {
 } from "react-simple-captcha";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   const location = useLocation();
@@ -117,7 +118,7 @@ const Login = () => {
               </small>
             </p>
             <div className="divider"></div>
-            {/* <SocialLogin></SocialLogin> */}
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
