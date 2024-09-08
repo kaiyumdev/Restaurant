@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -171,7 +172,7 @@ const SignUp = () => {
               </p>
             </div>
             <div className="divider"></div>
-            {/* <SocialLogin></SocialLogin> */}
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
