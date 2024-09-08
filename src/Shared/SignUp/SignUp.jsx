@@ -31,17 +31,20 @@ const SignUp = () => {
           email: data.email,
           photoURL: data.photoURL,
         };
-        axiosPublic
-          .post("/users", userInfo)
-          .then((res) => console.log(res.data));
-        // reset();
-        // Swal.fire({
-        //   position: "top-end",
-        //   icon: "success",
-        //   title: "Create a new user profile",
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        // });
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log(res.data);
+            reset();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "User created successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          }
+        });
         navigate(from, { replace: true });
       });
     });
