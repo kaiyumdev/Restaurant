@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
   const location = useLocation();
   let navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   let from = location?.state?.from?.pathname || "/";
   const {
@@ -29,14 +31,17 @@ const SignUp = () => {
           email: data.email,
           photoURL: data.photoURL,
         };
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Create a new user profile",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        axiosPublic
+          .post("/users", userInfo)
+          .then((res) => console.log(res.data));
+        // reset();
+        // Swal.fire({
+        //   position: "top-end",
+        //   icon: "success",
+        //   title: "Create a new user profile",
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
         navigate(from, { replace: true });
       });
     });
