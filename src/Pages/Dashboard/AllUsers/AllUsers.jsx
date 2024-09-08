@@ -1,4 +1,4 @@
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import useUsers from "../../../hooks/useUsers";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -6,6 +6,21 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const AllUsers = () => {
   const [users, refetch] = useUsers();
   const axiosSecure = useAxiosSecure();
+
+  const handleMakeAdmin = (user) => {
+    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user?.name} is now an Admin!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
 
   const handleDelete = (user) => {
     Swal.fire({
@@ -56,7 +71,7 @@ const AllUsers = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    {/* {user.role === "admin" ? (
+                    {user.role === "admin" ? (
                       "Admin"
                     ) : (
                       <button
@@ -65,7 +80,7 @@ const AllUsers = () => {
                       >
                         <FaUsers />
                       </button>
-                    )} */}
+                    )}
                   </td>
                   <td>
                     <button
