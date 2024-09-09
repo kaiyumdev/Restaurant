@@ -8,7 +8,9 @@ const useAxiosSecure = () => {
   axiosSecure.interceptors.request.use(
     function (config) {
       // Do something before request is sent
-      console.log("request stopped by interceptor");
+      const token = localStorage.getItem("token");
+      console.log("request stopped by interceptor", token);
+      config.headers.authorization = `Bearer ${token}`;
       return config;
     },
     function (error) {
