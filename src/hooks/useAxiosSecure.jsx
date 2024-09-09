@@ -35,11 +35,8 @@ const useAxiosSecure = () => {
     async (error) => {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       // Do something with response error
-      console.log("status error in the interceptor: ", error);
-      console.log(error);
       const status = error?.response?.status;
-      console.log("error happend", status);
-      console.log("status error in the interceptor", status);
+      console.log("status error in the interceptor: ", error);
       if (status === 401 || status === 403) {
         await logOut();
         navigate("/login");
