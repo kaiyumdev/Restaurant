@@ -11,7 +11,6 @@ const useUsers = () => {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(res);
       return res.data;
     },
   });
