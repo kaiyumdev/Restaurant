@@ -11,12 +11,14 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   const googleProvider = new GoogleAuthProvider();
 
@@ -53,9 +55,17 @@ const AuthProvider = ({ children }) => {
       setLoading(true);
       setUser(currentUser);
       if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          console.log(res.data.token);
+          if (res.data.token) {
+            localStorage.setItem("token", res.data.token);
+          }
+        });
         // console.log(currentUser);
       } else {
         setLoading(false);
+        localStorage.removeItem("token");
       }
     });
     return () => {
