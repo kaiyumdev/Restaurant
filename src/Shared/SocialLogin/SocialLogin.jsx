@@ -18,17 +18,8 @@ const SocialLogin = () => {
           photoURL: result.user.photoURL,
         };
         axiosPublic.post("/users", userInfo).then((res) => {
-          if (res.data.insertedId) {
-            console.log(res.data);
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "User created by google successfully",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            navigate("/");
-          }
+          console.log(res.data);
+          navigate("/");
         });
       })
       .catch((error) => console.log("Google Sign In Failed!", error));
