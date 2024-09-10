@@ -29,7 +29,6 @@ const AddItems = () => {
         image: res.data.data.display_url,
       };
       const menuRes = await axiosSecure.post("/menu", menuItem);
-      console.log(menuRes.data);
       reset();
       if (menuRes.data.insertedId) {
         Swal.fire({
