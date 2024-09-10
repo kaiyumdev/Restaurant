@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const AddItems = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
+  const onSubmit = (data) => {};
   return (
     <div>
       <SectionTitle
@@ -41,7 +45,7 @@ const AddItems = () => {
               <option value="pizza">Pizza</option>
               <option value="soup">Soup</option>
               <option value="dessert">Dessert</option>
-              <option value="drinks">Drinks</option>
+              <option value="drinks">Drink</option>
               <option value="drinks">Offered</option>
             </select>
           </div>
