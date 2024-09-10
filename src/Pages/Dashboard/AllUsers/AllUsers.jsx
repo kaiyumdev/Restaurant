@@ -1,7 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import useUsers from "../../../hooks/useUsers";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AllUsers = () => {
   const [users, refetch] = useUsers();
