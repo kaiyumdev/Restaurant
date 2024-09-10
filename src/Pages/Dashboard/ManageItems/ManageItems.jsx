@@ -2,9 +2,29 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
 import useMenu from "../../../hooks/useMenu";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageItems = () => {
   const [menu] = useMenu();
+  const axiosSecure = useAxiosSecure();
+  const handleDeleteItem = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/menu/${item._id}`).then((res) => {
+          console.log(res);
+        });
+      }
+    });
+  };
   return (
     <div>
       <SectionTitle
@@ -48,7 +68,7 @@ const ManageItems = () => {
                   </td>
                   <td>
                     <button
-                      //   onClick={() => handleDeleteItem(item)}
+                      onClick={() => handleDeleteItem(item)}
                       className="btn btn-ghost btn-md bg-orange-500"
                     >
                       <FaTrashAlt></FaTrashAlt>
