@@ -17,7 +17,19 @@ const AddItems = () => {
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    console.log(res.data.data.display_url);
+
+    if (res.data.success) {
+      //now send the menu item data to the server with the image url
+      const menuItem = {
+        name: data.name,
+        category: data.category,
+        price: data.price,
+        recipe: data.recipe,
+        image: res.data.data.display_url,
+      };
+      const menuRes = await axiosSecure.post("/menu", menuItem);
+      console.log(menuRes.data);
+    }
   };
   return (
     <div>
