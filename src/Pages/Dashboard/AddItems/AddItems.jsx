@@ -4,12 +4,13 @@ import { FaUtensils } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddItems = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const onSubmit = async (data) => {
@@ -29,6 +30,16 @@ const AddItems = () => {
       };
       const menuRes = await axiosSecure.post("/menu", menuItem);
       console.log(menuRes.data);
+      reset();
+      if (menuRes.data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${data.name} is added to the menu`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     }
   };
   return (
