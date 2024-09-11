@@ -5,6 +5,7 @@ import { FaUtensils } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -15,7 +16,34 @@ const UpdateItem = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data) => {
+    console.log(data);
+    const imageFile = { image: data.image[0] };
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    if (res.data.success) {
+      //now send the menu item data to the server with the image url
+      const menuItem = {
+        name: data.name,
+        category: data.category,
+        price: data.price,
+        recipe: data.recipe,
+        image: res.data.data.display_url,
+      };
+      const menuRes = await axiosSecure.patch(`menu/${_id}`, menuItem);
+      reset();
+      if (menuRes.data.modifiedCount > 0) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${data.name} is updated to the menu`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
+  };
   return (
     <div>
       <SectionTitle
