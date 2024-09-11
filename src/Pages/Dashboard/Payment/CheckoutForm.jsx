@@ -84,7 +84,7 @@ const CheckoutForm = () => {
           status: "pending",
         };
         const res = await axiosSecure.post("/payments", payment);
-        console.log(res);
+        console.log(res.data);
       }
     }
   };
