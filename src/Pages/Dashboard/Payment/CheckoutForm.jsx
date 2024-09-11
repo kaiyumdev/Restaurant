@@ -3,14 +3,16 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useCart from "../../../hooks/useCart";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 
 const CheckoutForm = () => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const stripe = useStripe();
-  const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const [cart, refetch] = useCart();
+  const { user } = useAuth();
+  const stripe = useStripe();
+  const elements = useElements();
   const totalPrice = cart.reduce(
     (prevItem, currItem) => prevItem + currItem.price,
     0
@@ -49,6 +51,18 @@ const CheckoutForm = () => {
       console.log("payment method", paymentMethod);
       setError("");
     }
+
+    //confirm the payment
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: user?.displayName || "anonymous",
+            email: user?.email || "anonymous",
+          },
+        },
+      });
   };
   return (
     <form onSubmit={handleSubmit}>
