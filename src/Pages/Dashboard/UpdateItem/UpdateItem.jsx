@@ -11,10 +11,11 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const UpdateItem = () => {
   const { name, category, price, recipe, image, _id } = useLoaderData();
-  // console.log(item);
   const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+
+  const onSubmit = async (data) => {};
   return (
     <div>
       <SectionTitle
@@ -27,7 +28,7 @@ const UpdateItem = () => {
             <span className="label-text">Recipe Name</span>
           </div>
           <input
-            // {...register("name", { required: true })}
+            {...register("name", { required: true })}
             required
             type="text"
             defaultValue={name}
@@ -41,7 +42,7 @@ const UpdateItem = () => {
               <span className="label-text">Category</span>
             </div>
             <select
-              //   defaultValue={category}
+              defaultValue={category}
               {...register("category", { required: true })}
               className="select select-bordered w-full"
             >
@@ -60,7 +61,7 @@ const UpdateItem = () => {
               <span className="label-text">Receipe Price</span>
             </div>
             <input
-              //   {...register("price", { required: true })}
+              {...register("price", { required: true })}
               defaultValue={price}
               type="text"
               placeholder="Price Name"
@@ -74,7 +75,7 @@ const UpdateItem = () => {
               <span className="label-text">Recipe Details</span>
             </div>
             <textarea
-              //   defaultValue={recipe}
+              defaultValue={recipe}
               {...register("recipe")}
               className="textarea textarea-bordered h-24"
               placeholder="Bio"
