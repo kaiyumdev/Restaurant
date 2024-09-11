@@ -63,6 +63,12 @@ const CheckoutForm = () => {
           },
         },
       });
+
+    if (confirmError) {
+      console.log("confirm error", confirmError);
+    } else {
+      console.log("payment Intent", paymentIntent);
+    }
   };
   return (
     <form onSubmit={handleSubmit}>
