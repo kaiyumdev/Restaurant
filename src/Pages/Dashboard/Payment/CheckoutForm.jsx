@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useCart from "../../../hooks/useCart";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const CheckoutForm = () => {
   const [error, setError] = useState("");
@@ -20,12 +21,14 @@ const CheckoutForm = () => {
   );
 
   useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent", { price: totalPrice })
-      .then((res) => {
-        console.log(res.data.clientSecret);
-        setClientSecret(res.data.clientSecret);
-      });
+    if (totalPrice > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        });
+    }
   }, [axiosSecure, totalPrice]);
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -84,7 +87,18 @@ const CheckoutForm = () => {
           status: "pending",
         };
         const res = await axiosSecure.post("/payments", payment);
-        console.log(res.data);
+        console.log("payment save", res);
+        refetch();
+        if (res?.data?.paymentResult?.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Payment successful!",
+            text: "Your order has been placed successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       }
     }
   };
