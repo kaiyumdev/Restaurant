@@ -27,12 +27,12 @@ const Navbar = () => {
 
       {user && !isAdmin && (
         <li>
-          <Link to="/dashboard/userHome">Dashboard</Link>
+          <Link to="/dashboard/userHome">User Home</Link>
         </li>
       )}
       {user && isAdmin && (
         <li>
-          <Link to="/dashboard/adminHome">Dashboard</Link>
+          <Link to="/dashboard/adminHome">Admin Home</Link>
         </li>
       )}
       <li className="flex items-center justify-center">
