@@ -152,7 +152,7 @@ const AdminHome = () => {
               label={{ position: "top" }}
             >
               {pieChartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % 6]} />
+                <Cell key={`cell-${index}`} fill={colors[index % 7]} />
               ))}
             </Bar>
           </BarChart>
