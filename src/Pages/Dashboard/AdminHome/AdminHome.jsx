@@ -13,7 +13,6 @@ const AdminHome = () => {
       return res.data;
     },
   });
-  console.log(stats);
   return (
     <div>
       <h2 className="text-3xl">
