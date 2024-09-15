@@ -42,7 +42,8 @@ const Cart = () => {
       <div className="flex justify-evenly my-5">
         {/* <h1 className="text-2xl font-bold">My Cart</h1> */}
         <h1 className="text-gray-600 text-2xl font-bold">
-          Total Price: <span className="text-yellow-600">${totalPrice}</span>
+          Total Price:{" "}
+          <span className="text-yellow-600">${totalPrice.toFixed(2)}</span>
         </h1>
         <p className="text-gray-600 font-bold">
           Total Items: <span className="text-yellow-600">{cart.length}</span>
