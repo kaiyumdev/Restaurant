@@ -83,7 +83,6 @@
 
 // export default Dashboard;
 
-//updated dashboard layout
 import {
   FaAd,
   FaBook,
